@@ -90,7 +90,50 @@ const keys = document.querySelectorAll(".key");
 let handleKeyMouseDown = function(e) {
         e.target.classList.add("key_active")
         let key = e.target.innerText;
-        textarea.value += key;
+        switch (key) {
+            default :
+                textarea.value += key;
+                break
+            case 'Backspace':
+                textarea.value = textarea.value.substring(1, textarea.value.length)
+                break;
+            case 'Tab':
+                textarea.value = textarea.value.substring(1, textarea.value.length)
+                break;
+            case 'Del':
+                textarea.value = textarea.value.substring(1, textarea.value.length)
+                break;
+            case 'Caps':
+                textarea.value = textarea.value.substring(1, textarea.value.length)
+                break;
+            case 'Enter':
+                textarea.value = textarea.value.substring(1, textarea.value.length)
+                break;
+            case 'Shift':
+                textarea.value = textarea.value.substring(1, textarea.value.length)
+                break;
+            case 'Ctrl':
+                textarea.value = textarea.value.substring(1, textarea.value.length)
+                break;
+            case 'Alt':
+                textarea.value = textarea.value.substring(1, textarea.value.length)
+                break;
+            case 'Win':
+                textarea.value = textarea.value.substring(1, textarea.value.length)
+                break;
+            case 'ArrowUp':
+                textarea.value = textarea.value.substring(1, textarea.value.length)
+                break;
+            case 'ArrowLeft':
+                textarea.value = textarea.value.substring(1, textarea.value.length)
+                break;
+            case 'ArrowDown':
+                textarea.value = textarea.value.substring(1, textarea.value.length)
+                break;
+            case 'ArrowRight':
+                textarea.value = textarea.value.substring(1, textarea.value.length)
+                break;
+        }
 
         console.log(e.target.innerHTML)
 }
