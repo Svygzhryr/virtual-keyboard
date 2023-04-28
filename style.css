@@ -42,8 +42,17 @@ body {
   border-radius: 5px;
 }
 .key:hover {
-  background-color: #689bc7;
   cursor: pointer;
+}
+
+.key_active {
+  background-color: #689bc7;
+  color: #16161e;
+  transition: all 0.2s ease-in-out;
+}
+
+.key_active-alt {
+  background-color: #689bc7;
   color: #16161e;
 }
 

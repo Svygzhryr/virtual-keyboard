@@ -50,10 +50,20 @@ body {
 
 
     &:hover {
-        background-color: $active;
+        // background-color: $highlight;
         cursor: pointer;
-        color: $main;
     }
+}
+
+.key_active {
+  background-color: $active;
+  color: $main;
+  transition: all .2s ease-in-out
+}
+
+.key_active-alt {
+  background-color: $active;
+  color: $main;
 }
 
 .backspace {
