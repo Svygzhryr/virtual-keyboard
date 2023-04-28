@@ -1,4 +1,17 @@
-const buttons = ["`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "backspace", "tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\", "del", "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", '"', "enter", "shift", "\\", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "▲", "shift", "ctrl", "win", "alt", "space", "alt", "ctrl", "◄" ,"▼", "►"];
+const buttons = [
+"`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace", 
+"Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\", "Del", 
+"Caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", '"', "Enter", 
+"Shift", "\\", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "▲", "Shift", 
+"Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl", "◄" ,"▼", "►"];
+
+const keyCodes = [
+"192", "49", "50", "51", "52", "53", "54", "55", "56", "57", "48", "189", "187", "8",
+"9", "81", "87", "69", "82", "84", "89", "85", "73", "79", "80", "219", "221", "220", "46",
+"20", "65", "83", "68", "70", "71", "72", "74", "75", "76", "186", "222", "13",
+"16", "220", "90", "88", "67", "86", "66", "78", "77", "188", "190", "191", "38", "16",
+"17", "91", "18", "32", "18", "17", "37", "40", "39"
+]
 
 const app = document.createElement("section");
 app.className = "app";
@@ -76,6 +89,10 @@ const keys = document.querySelectorAll(".key");
 
 let handleKeyMouseDown = function(e) {
         e.target.classList.add("key_active")
+        let key = e.target.innerText;
+        textarea.value += key;
+
+        console.log(e.target.innerHTML)
 }
 
 let handleKeyMouseUp = function(e) {
@@ -91,7 +108,8 @@ let handleKeyMouseLeave = function(e) {
 }
 
 let handleKeyDown = function(e) {
-    let key = e.keyCode;
+    let key = e.key;
+    textarea.value += key;
     console.log(key)
 }
 
@@ -99,10 +117,12 @@ let handleKeyUp = function(e) {
     let key = e.keyCode;
 }
 
-keys.forEach(e => {
+keys.forEach((e, i) => {
+    e.setAttribute('data-code', keyCodes[i])
     e.addEventListener("mousedown", handleKeyMouseDown);
     e.addEventListener("mouseup", handleKeyMouseUp);
     e.addEventListener("mouseleave", handleKeyMouseLeave);
+
 })
 
 document.body.addEventListener('mouseup', function(){

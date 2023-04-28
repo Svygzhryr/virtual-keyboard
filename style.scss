@@ -66,27 +66,29 @@ body {
   color: $main;
 }
 
-.backspace {
+.Backspace {
   width: 105px;
   padding: 0;
 }
 
-.caps {
+.Caps {
   width: 105px;
 }
 
-.enter {
+.Enter {
   width: 105px;
 }
 
-.shift:first-child {
+.Shift:first-child {
   width: 105px;
 }
 
-.ctrl:first-child {
+.Ctrl:first-child {
   width: 75px;
 }
 
-.space {
+.Space {
   width: 355px;
+  color: $alt;
+  color: transparent;
 }
