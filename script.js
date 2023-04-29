@@ -95,10 +95,12 @@ let handleKeyMouseDown = function(e) {
                 textarea.value += key;
                 break
             case 'Backspace':
-                textarea.value = textarea.value.substring(1, textarea.value.length)
+                let text = textarea.value;
+                console.log(pos)
+                textarea.value = text.substring(0, pos - 1) + text.substring(pos, text.length);
                 break;
             case 'Tab':
-                textarea.value = textarea.value.substring(1, textarea.value.length)
+                textarea.value += "    ";
                 break;
             case 'Del':
                 textarea.value = textarea.value.substring(1, textarea.value.length)
@@ -107,31 +109,15 @@ let handleKeyMouseDown = function(e) {
                 textarea.value = textarea.value.substring(1, textarea.value.length)
                 break;
             case 'Enter':
-                textarea.value = textarea.value.substring(1, textarea.value.length)
+                textarea.value += '\n';
                 break;
             case 'Shift':
-                textarea.value = textarea.value.substring(1, textarea.value.length)
                 break;
             case 'Ctrl':
-                textarea.value = textarea.value.substring(1, textarea.value.length)
                 break;
             case 'Alt':
-                textarea.value = textarea.value.substring(1, textarea.value.length)
                 break;
             case 'Win':
-                textarea.value = textarea.value.substring(1, textarea.value.length)
-                break;
-            case 'ArrowUp':
-                textarea.value = textarea.value.substring(1, textarea.value.length)
-                break;
-            case 'ArrowLeft':
-                textarea.value = textarea.value.substring(1, textarea.value.length)
-                break;
-            case 'ArrowDown':
-                textarea.value = textarea.value.substring(1, textarea.value.length)
-                break;
-            case 'ArrowRight':
-                textarea.value = textarea.value.substring(1, textarea.value.length)
                 break;
         }
 
