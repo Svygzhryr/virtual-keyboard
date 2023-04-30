@@ -5,7 +5,7 @@ const buttons = [
 "Shift", "\\", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "▲", "Shift", 
 "Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl", "◄" ,"▼", "►"];
 
-const keyCodes = [
+let keyCodes = [
 "192", "49", "50", "51", "52", "53", "54", "55", "56", "57", "48", "189", "187", "8",
 "9", "81", "87", "69", "82", "84", "89", "85", "73", "79", "80", "219", "221", "220", "46",
 "20", "65", "83", "68", "70", "71", "72", "74", "75", "76", "186", "222", "13",
@@ -103,10 +103,8 @@ let handleKeyMouseDown = function(e) {
                 textarea.value += "    ";
                 break;
             case 'Del':
-                textarea.value = textarea.value.substring(1, textarea.value.length)
                 break;
             case 'Caps':
-                textarea.value = textarea.value.substring(1, textarea.value.length)
                 break;
             case 'Enter':
                 textarea.value += '\n';
@@ -118,6 +116,9 @@ let handleKeyMouseDown = function(e) {
             case 'Alt':
                 break;
             case 'Win':
+                break;
+            case 'Space':
+                textarea.value += " "
                 break;
         }
 
@@ -138,11 +139,63 @@ let handleKeyMouseLeave = function(e) {
 
 let handleKeyDown = function(e) {
     let key = e.key;
-    textarea.value += key;
-    console.log(key)
+    keyCodes = keyCodes.map(e => {
+       return e = +e;
+    })
+    switch (key) {
+        default :
+            if (!keyCodes.includes(e.keyCode)) {
+                return null
+            } else
+            textarea.value += key;
+            break
+        case 'Backspace':
+            let text = textarea.value;
+            textarea.value = text.substring(0, pos - 1) + text.substring(pos, text.length);
+            break;
+        case 'Tab':
+            e.preventDefault();
+            textarea.value += "    ";
+            break;
+        case 'Del':
+            break;
+        case 'CapsLock':
+            break;
+        case 'Enter':
+            textarea.value += '\n';
+            break;
+        case 'Shift':
+            break;
+        case 'Control':
+            break;
+        case 'Alt':
+            break;
+        case 'Meta':
+            break;
+        case 'Space':
+            textarea.value += " ";
+            break;
+        case 'ArrowUp':
+            textarea.value += "▲"
+            break;
+        case 'ArrowLeft':
+            textarea.value += "◄"
+            break;
+        case 'ArrowDown':
+            textarea.value += "▼"
+            break;
+        case 'ArrowRight':
+            textarea.value += "►"
+            break;
+    }
+    let btn = document.querySelector(`[data-code="${e.keyCode}"]`)
+    btn.classList.add("key_active");
 }
 
 let handleKeyUp = function(e) {
+    let btn = document.querySelector(`[data-code="${e.keyCode}"]`)
+    btn.classList.remove("key_active");
+
     let key = e.keyCode;
 }
 
