@@ -5,6 +5,13 @@ const buttons = [
 "Shift", "\\", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "▲", "Shift", 
 "Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl", "◄" ,"▼", "►"];
 
+const rubuttons = [
+    "ё", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace", 
+    "Tab", "й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х", "ъ", "\\", "Del", 
+    "Caps", "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", 'э', "Enter", 
+    "Shift", "\\", "я", "ч", "с", "м", "и", "т", "ь", "б", "ю", ".", "▲", "Shift", 
+    "Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl", "◄" ,"▼", "►"];
+
 let keyCodes = [
 "192", "49", "50", "51", "52", "53", "54", "55", "56", "57", "48", "189", "187", "8",
 "9", "81", "87", "69", "82", "84", "89", "85", "73", "79", "80", "219", "221", "220", "46",
@@ -25,7 +32,7 @@ const keyboard = document.createElement("div");
 keyboard.className = "keyboard";
 app.appendChild(keyboard);
 
-(function createKeys() {
+let createKeys = function(buttons) {
     let row;
 
     for (let j = 1; j <= 5; j++) {
@@ -83,9 +90,28 @@ app.appendChild(keyboard);
         el.innerHTML = buttons[i];
         document.querySelector(`.row5`).appendChild(el);
     }
-})();
+};
 
-const keys = document.querySelectorAll(".key");
+createKeys(buttons);
+
+
+let keys = document.querySelectorAll(".key");
+let eng = true;
+
+
+let switchLanguage = function() {
+    document.querySelectorAll('.keyboard-row').forEach(e => {e.remove()})
+    if (eng) {
+        eng = !eng;
+        createKeys(rubuttons);
+        keys = document.querySelectorAll(".key");
+    } else {
+        eng = !eng;
+        createKeys(buttons);
+        keys = document.querySelectorAll(".key");
+    }
+    
+}
 
 let handleKeyMouseDown = function(e) {
         e.target.classList.add("key_active")
@@ -169,6 +195,10 @@ let handleKeyDown = function(e) {
         case 'Control':
             break;
         case 'Alt':
+            e.preventDefault();
+            if (e.shiftKey) {
+                switchLanguage();
+            }
             break;
         case 'Meta':
             break;
@@ -194,7 +224,7 @@ let handleKeyDown = function(e) {
 
 let handleKeyUp = function(e) {
     let btn = document.querySelector(`[data-code="${e.keyCode}"]`)
-    btn.classList.remove("key_active");
+    btn ? btn.classList.remove("key_active") : null;
 
     let key = e.keyCode;
 }

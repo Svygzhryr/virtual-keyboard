@@ -19,7 +19,7 @@ body {
   border: none;
   color: #c0Caf5;
   font-size: 20px;
-  width: 60%;
+  width: 82%;
   height: 200px;
   margin-bottom: 50px;
 }
@@ -46,13 +46,13 @@ body {
 }
 
 .key_active {
-  background-color: #689bc7;
+  background-color: #5a9dd7;
   color: #16161e;
   transition: all 0.2s ease-in-out;
 }
 
 .key_active-alt {
-  background-color: #689bc7;
+  background-color: #5a9dd7;
   color: #16161e;
 }
 
