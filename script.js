@@ -90,6 +90,16 @@ let createKeys = function(buttons) {
         el.innerHTML = buttons[i];
         document.querySelector(`.row5`).appendChild(el);
     }
+
+    let keys = document.querySelectorAll(".key");
+
+    keys.forEach((e, i) => {
+        e.setAttribute('data-code', keyCodes[i])
+        e.addEventListener("mousedown", handleKeyMouseDown);
+        e.addEventListener("mouseup", handleKeyMouseUp);
+        e.addEventListener("mouseleave", handleKeyMouseLeave);
+    
+    })
 };
 
 createKeys(buttons);
@@ -97,7 +107,7 @@ createKeys(buttons);
 
 let keys = document.querySelectorAll(".key");
 let eng = true;
-
+let caps = false;
 
 let switchLanguage = function() {
     document.querySelectorAll('.keyboard-row').forEach(e => {e.remove()})
@@ -113,7 +123,7 @@ let switchLanguage = function() {
     
 }
 
-let handleKeyMouseDown = function(e) {
+function handleKeyMouseDown(e) {
         e.target.classList.add("key_active")
         let key = e.target.innerText;
         switch (key) {
@@ -122,8 +132,7 @@ let handleKeyMouseDown = function(e) {
                 break
             case 'Backspace':
                 let text = textarea.value;
-                console.log(pos)
-                textarea.value = text.substring(0, pos - 1) + text.substring(pos, text.length);
+                textarea.value = text.substring(0, text.length - 1);
                 break;
             case 'Tab':
                 textarea.value += "    ";
@@ -131,6 +140,7 @@ let handleKeyMouseDown = function(e) {
             case 'Del':
                 break;
             case 'Caps':
+
                 break;
             case 'Enter':
                 textarea.value += '\n';
@@ -151,19 +161,19 @@ let handleKeyMouseDown = function(e) {
         console.log(e.target.innerHTML)
 }
 
-let handleKeyMouseUp = function(e) {
+function handleKeyMouseUp(e) {
     if (!e.target.classList.contains("key_active")) {
         e.target.classList.add("key_active")
     } e.target.classList.remove("key_active")
 }
 
-let handleKeyMouseLeave = function(e) {
+function handleKeyMouseLeave(e) {
     if (!e.target.classList.contains("key_active")) {
         e.target.classList.add("key_active")
     } e.target.classList.remove("key_active")
 }
 
-let handleKeyDown = function(e) {
+function handleKeyDown(e) {
     let key = e.key;
     keyCodes = keyCodes.map(e => {
        return e = +e;
@@ -177,15 +187,29 @@ let handleKeyDown = function(e) {
             break
         case 'Backspace':
             let text = textarea.value;
-            textarea.value = text.substring(0, pos - 1) + text.substring(pos, text.length);
+            textarea.value = text.substring(0, text.length - 1);
             break;
         case 'Tab':
             e.preventDefault();
             textarea.value += "    ";
             break;
-        case 'Del':
+        case 'Delete':
             break;
         case 'CapsLock':
+            if (!caps) {
+                keys.forEach(e => {
+                    if (e.innerHTML.length < 2) {
+                        e.innerHTML = e.innerHTML.toUpperCase();
+                    }
+                })
+            } else {
+                keys.forEach(e => {
+                    if (e.innerHTML.length < 2) {
+                        e.innerHTML = e.innerHTML.toLowerCase();
+                    }
+                })
+            }
+            caps = !caps
             break;
         case 'Enter':
             textarea.value += '\n';
