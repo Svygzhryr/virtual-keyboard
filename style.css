@@ -23,6 +23,9 @@ body {
   height: 200px;
   margin-bottom: 50px;
 }
+.screen::placeholder {
+  color: #696f8d;
+}
 
 .keyboard-row {
   display: flex;

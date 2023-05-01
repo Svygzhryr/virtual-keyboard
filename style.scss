@@ -24,6 +24,10 @@ body {
   width: 82%;
   height: 200px;
   margin-bottom: 50px;
+
+  &::placeholder {
+    color: $alt-text;
+  }
 }
 
 .keyboard {

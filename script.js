@@ -6,11 +6,11 @@ const buttons = [
 "Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl", "◄" ,"▼", "►"];
 
 const rubuttons = [
-    "ё", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace", 
-    "Tab", "й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х", "ъ", "\\", "Del", 
-    "Caps", "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", 'э', "Enter", 
-    "Shift", "\\", "я", "ч", "с", "м", "и", "т", "ь", "б", "ю", ".", "▲", "Shift", 
-    "Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl", "◄" ,"▼", "►"];
+"ё", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace", 
+"Tab", "й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х", "ъ", "\\", "Del", 
+"Caps", "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", 'э', "Enter", 
+"Shift", "\\", "я", "ч", "с", "м", "и", "т", "ь", "б", "ю", ".", "▲", "Shift", 
+"Ctrl", "Win", "Alt", "Space", "Alt", "Ctrl", "◄" ,"▼", "►"];
 
 let keyCodes = [
 "192", "49", "50", "51", "52", "53", "54", "55", "56", "57", "48", "189", "187", "8",
@@ -26,6 +26,7 @@ document.body.appendChild(app);
 
 const textarea = document.createElement("textarea");
 textarea.className = "screen";
+textarea.setAttribute("placeholder", "Клавиатура Windows\nСмена языка - Ctrl + Alt (в таком порядке)")
 app.appendChild(textarea);
 
 const keyboard = document.createElement("div");
@@ -108,6 +109,10 @@ createKeys(buttons);
 let keys = document.querySelectorAll(".key");
 let eng = true;
 let caps = false;
+let alt = false;
+let ctrl = false;
+
+let focus = false;
 
 let switchLanguage = function() {
     document.querySelectorAll('.keyboard-row').forEach(e => {e.remove()})
@@ -140,7 +145,20 @@ function handleKeyMouseDown(e) {
             case 'Del':
                 break;
             case 'Caps':
-
+                if (!caps) {
+                    keys.forEach(e => {
+                        if (e.innerHTML.length < 2) {
+                            e.innerHTML = e.innerHTML.toUpperCase();
+                        }
+                    })
+                } else {
+                    keys.forEach(e => {
+                        if (e.innerHTML.length < 2) {
+                            e.innerHTML = e.innerHTML.toLowerCase();
+                        }
+                    })
+                }
+                caps = !caps
                 break;
             case 'Enter':
                 textarea.value += '\n';
@@ -175,6 +193,8 @@ function handleKeyMouseLeave(e) {
 
 function handleKeyDown(e) {
     let key = e.key;
+    let button = document.querySelector(`[data-code="${e.keyCode}"]`);
+    let dkey = button.innerText;
     keyCodes = keyCodes.map(e => {
        return e = +e;
     })
@@ -183,11 +203,11 @@ function handleKeyDown(e) {
             if (!keyCodes.includes(e.keyCode)) {
                 return null
             } else
-            textarea.value += key;
+            if (!focus) {
+                textarea.value += dkey;
+            }
             break
         case 'Backspace':
-            let text = textarea.value;
-            textarea.value = text.substring(0, text.length - 1);
             break;
         case 'Tab':
             e.preventDefault();
@@ -212,15 +232,25 @@ function handleKeyDown(e) {
             caps = !caps
             break;
         case 'Enter':
-            textarea.value += '\n';
+            if (!focus) {
+                textarea.value += '\n';
+            }
+
             break;
         case 'Shift':
+            keys.forEach(e => {
+                if (e.innerHTML.length < 2) {
+                    e.innerHTML = e.innerHTML.toUpperCase();
+                }
+            })
             break;
         case 'Control':
+            ctrl = true;
             break;
         case 'Alt':
+            alt = !alt;
             e.preventDefault();
-            if (e.shiftKey) {
+            if (ctrl) {
                 switchLanguage();
             }
             break;
@@ -247,10 +277,23 @@ function handleKeyDown(e) {
 }
 
 let handleKeyUp = function(e) {
+    let key = e.key;
+
     let btn = document.querySelector(`[data-code="${e.keyCode}"]`)
     btn ? btn.classList.remove("key_active") : null;
 
-    let key = e.keyCode;
+    switch (key) {
+        case 'Shift':
+            keys.forEach(e => {
+                if (e.innerHTML.length < 2) {
+                    e.innerHTML = e.innerHTML.toLowerCase();
+                }
+            })
+        break
+        case 'Control':
+            ctrl = false;
+            break;
+    }
 }
 
 keys.forEach((e, i) => {
@@ -267,3 +310,10 @@ document.body.addEventListener('mouseup', function(){
 
 window.addEventListener("keydown", handleKeyDown);
 window.addEventListener("keyup", handleKeyUp);
+textarea.addEventListener("focusin", function(e) {
+    e.preventDefault();
+    focus = true;
+})
+textarea.addEventListener("focusout", function(e) {
+    focus = false;
+})
