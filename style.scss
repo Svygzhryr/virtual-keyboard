@@ -2,25 +2,97 @@
 
 body {
   background-color: $main;
+  overflow: hidden;
 }
 
-.button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+.app {
+  margin: 0 auto;
+  height: 100vh;
+  width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: $main;
+}
+
+.screen {
+  background-color: $alt;
+  border: none;
+  color: $text;
+  font-size: 20px;
+  width: 82%;
+  height: 200px;
+  margin-bottom: 50px;
+
+  &::placeholder {
+    color: $alt-text;
+  }
+}
+
+.keyboard {
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 5px;
+
+  margin-top: 5px;
+
+}
+
+.key {
     background-color: $alt;
     width: 50px;
     height: 50px;
     border: none;
     color: $text;
     transition: all .2s ease-in-out;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     border-radius: 5px;
 
+
     &:hover {
-        background-color: $active;
+        // background-color: $highlight;
         cursor: pointer;
-        color: $main;
     }
+}
+
+.key_active {
+  background-color: $active;
+  color: $main;
+  transition: all .2s ease-in-out
+}
+
+.key_active-alt {
+  background-color: $active;
+  color: $main;
+}
+
+.Backspace {
+  width: 105px;
+  padding: 0;
+}
+
+.Caps {
+  width: 105px;
+}
+
+.Enter {
+  width: 105px;
+}
+
+.Shift:first-child {
+  width: 105px;
+}
+
+.Ctrl:first-child {
+  width: 75px;
+}
+
+.Space {
+  width: 355px;
+  color: $alt;
+  color: transparent;
 }

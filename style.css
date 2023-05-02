@@ -1,23 +1,87 @@
 body {
   background-color: #16161e;
+  overflow: hidden;
 }
 
-.button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+.app {
+  margin: 0 auto;
+  height: 100vh;
+  width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #16161e;
+}
+
+.screen {
+  background-color: #262838;
+  border: none;
+  color: #c0Caf5;
+  font-size: 20px;
+  width: 82%;
+  height: 200px;
+  margin-bottom: 50px;
+}
+.screen::placeholder {
+  color: #696f8d;
+}
+
+.keyboard-row {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.key {
   background-color: #262838;
   width: 50px;
   height: 50px;
   border: none;
   color: #c0Caf5;
   transition: all 0.2s ease-in-out;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
   border-radius: 5px;
 }
-.button:hover {
-  background-color: #689bc7;
+.key:hover {
   cursor: pointer;
+}
+
+.key_active {
+  background-color: #5a9dd7;
   color: #16161e;
+  transition: all 0.2s ease-in-out;
+}
+
+.key_active-alt {
+  background-color: #5a9dd7;
+  color: #16161e;
+}
+
+.Backspace {
+  width: 105px;
+  padding: 0;
+}
+
+.Caps {
+  width: 105px;
+}
+
+.Enter {
+  width: 105px;
+}
+
+.Shift:first-child {
+  width: 105px;
+}
+
+.Ctrl:first-child {
+  width: 75px;
+}
+
+.Space {
+  width: 355px;
+  color: #262838;
+  color: transparent;
 }/*# sourceMappingURL=style.css.map */
