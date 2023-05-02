@@ -256,8 +256,9 @@ function handleKeyDown(e) {
             break;
         case 'Meta':
             break;
-        case 'Space':
+        case ' ':
             textarea.value += " ";
+            console.log('hi')
             break;
         case 'ArrowUp':
             textarea.value += "▲"
